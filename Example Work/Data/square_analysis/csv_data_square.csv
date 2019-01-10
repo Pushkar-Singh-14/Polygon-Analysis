@@ -1,0 +1,5 @@
+x_coordinate;y_coordinate;distance_in_pixels;angles;name;slope
+27;25;548.0;89.69;square;0.0
+575;27;548.01;90.31;square;-182.67
+572;575;547.0;89.79;square;0.0
+25;573;548.0;90.21;square;-274.0
