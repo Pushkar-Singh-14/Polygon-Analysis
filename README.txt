@@ -23,7 +23,7 @@ polygon_analysis (file_name,
 file_name: as clear from the name, it takes a file name, if the file is in the same directory then you can simply type name, else type the full path to the file.
 
 
-show_and _save_contour= it allows you to see the various shapes that program detects in the image, it will also save the image file in a folder to Data/file_name_analysis/contour image.
+show_and _save_contour: it allows you to see the various shapes that program detects in the image, it will also save the image file in a folder to Data/file_name_analysis/contour image.
 Everything that saves during the program related to this file will save in this particular folder only.
 
 
@@ -53,7 +53,7 @@ font: you can change the Font if you want, Here is the list of some fonts
     cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
     cv2.FONT_HERSHEY_SCRIPT_COMPLEX
     
-This program return (len(sides),sides,distance,slope,angles,Name)
+This program return (len(sides),sides,distance,slope,angles,Name[0])
 
 
 len(sides): Number of sides in a figure.
@@ -61,10 +61,10 @@ Sides: it returns the coordinates of the shape. Side[0] is the first [x,y] set. 
 Distances: It returns the distance between two points in pixels.
 Slope: It returns back the slope values corresponds to each side
 Angle: It returns the angles.
-Name: It returns back the name of the shape.
+Name[0]: It returns back the name of the shape.
 
 
-Number_of_sides,Coordinates,Distance_in_pixels,Slopes,Angles,Names=                                                                                     polygon_analysis(file_name,
+Number_of_sides,Coordinates,Distance_in_pixels,Slopes,Angles,Names =   polygon_analysis(file_name,
                                                                               show_and_save_contour='yes',
                                                                              show_and_save_analysis='yes',
                                                                              show_sides='yes',
