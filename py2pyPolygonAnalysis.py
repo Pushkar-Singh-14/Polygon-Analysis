@@ -50,7 +50,7 @@ def polygon_analysis(file_name,
     background = Image.new('RGBA', (bigside, bigside), (255, 255, 255, 255))
     offset = (0,0)
     background.paste(image, offset)
-    file_name2=f'{width_old*2}X{height_old*2}_{file_name}.png'
+    file_name2=f'{width_old*2}X{height_old*2}_{name_file}.png'
     save_image=os.path.join(cwd,file_name2)
     save_image_in_data=os.path.join(path_save,file_name2)
 
