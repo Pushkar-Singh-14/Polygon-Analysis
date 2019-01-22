@@ -6,6 +6,15 @@ Our aim is to build a module which is enough to analyze a polygon and return som
 
 ----------
 
+Installation
+-------------
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+
+```bash
+pip install py2pyAnalysis
+```
+----------
 
 Documents
 -------------
