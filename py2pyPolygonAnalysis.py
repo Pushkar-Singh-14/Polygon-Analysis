@@ -9,7 +9,7 @@ from scipy import ndimage
 import math
 from decimal import Decimal
 
-##working
+
 
 def polygon_analysis(file_name,
                      show_and_save_contour='yes',
@@ -20,27 +20,20 @@ def polygon_analysis(file_name,
                      show_name='yes',
                      save_data_to_csv='yes',
                      font=cv2.FONT_HERSHEY_PLAIN):
+
+
     
     
 
+
+
+        
     ##font = cv2.FONT_HERSHEY_PLAIN
     ##font = cv2.FONT_HERSHEY_TRIPLEX
+      
 
-
-
-    
     cwd = os.getcwd()
     name_file=os.path.splitext(file_name)[0]
-
-    ##show_and_save_contour='yes'         
-    ##show_and_save_analysis='yes' 
-    ##show_sides='yes' 
-    ##show_angles='yes' 
-    ##show_slope='yes'
-    ##show_name='yes'
-    ##save_data_to_csv='yes'
-
-
     counter3=0
     limit=3  #detection_limit #3
 
@@ -61,12 +54,17 @@ def polygon_analysis(file_name,
 
     bigside=int(max(width_old,height_old)*1.5)
     background = Image.new('RGBA', (bigside, bigside), (255, 255, 255, 255))
-    #offset = (int(round(((bigside - width_old) / 2), 0)), int(round(((bigside - height_old) / 2),0)))
     offset = (0,0)
     background.paste(image, offset)
-    file_name2=f'{width_old*2}X{height_old*2}_{file_name}.png'
+    file_name2=f'{width_old*2}X{height_old*2}_{name_file}.png'
     save_image=os.path.join(cwd,file_name2)
     save_image_in_data=os.path.join(path_save,file_name2)
+
+
+    
+
+
+       
 
 
     if ((show_and_save_analysis=='yes') or (show_and_save_contour=='yes') or (save_data_to_csv=='yes')):
@@ -88,22 +86,14 @@ def polygon_analysis(file_name,
         blur = cv2.GaussianBlur(img,(5,5),0)
         img = plt.imread(save_image)
         plt.imshow(img)
+    
         
-
-
-
-
 
     font_of_name=cv2.FONT_HERSHEY_TRIPLEX
     font_size_name=max(height,width)*0.002
     font=cv2.FONT_HERSHEY_TRIPLEX
     font_size=font_size_name/1.5
     
-
-
-
-
-
 
 
     colors = 10*['r', 'b', 'y','g','k','c', 'm', 'seagreen','navy','gold','coral', 'violet', 'crimson','skyblue','hotpink','slateblue', 'b', 'y','g','k','r', 'b', 'y','g','k']
@@ -116,6 +106,9 @@ def polygon_analysis(file_name,
     m=[]
     angles=[]
     slope=[]
+    Name=[]
+
+
 
 
     def error_detection(abc):
@@ -129,12 +122,15 @@ def polygon_analysis(file_name,
 
 
 
+
     def error_detection_alternate(abc):
         error = []
         for i in range(int(len(abc)/2)):
             alt_error= (abs((abc[i]-abc[i+2])/abc[i+2]))
             error.append(alt_error)
         return (abs(np.mean(error)*100))
+
+
 
 
     def sides_length_and_slope(sides):
@@ -149,22 +145,7 @@ def polygon_analysis(file_name,
         for a,b in sides:
             x.append(a)
             y.append(b)
-    ####    for i in range(len(sides)):
-    ####        if (i == (len(sides)-1)):
-    ####            side_len.append(round((math.sqrt(((x[i]-x[0])**2)+((y[i]-y[0])**2))),2))
-    ####            if ((x[0]-x[i])==0):
-    ####                m.append(round(((y[i]-y[0])/1),2))
-    ####            else:
-    ####                m.append(round(((y[i]-y[0])/(x[i]-x[0])),2))
-    ####        
-    ####        else:
-    ####            side_len.append(round((math.sqrt(((x[i]-x[i+1])**2)+((y[i]-y[i+1])**2))),2))
-    ####            if ((x[i+1]-x[i])==0):
-    ####                m.append(round(((y[i]-y[i+1])/1),2))
-    ####            else:
-    ####                m.append(round((((y[i]-y[i+1])/(x[i]-x[i+1]))),2))
-    ####    print(side_len)    
-    ####    return side_len,m,x,y
+
         for i in range(len(sides)):
             if (i == (len(sides)-1)):
                 side_len.append(round((math.sqrt(((x[i]-x[0])**2)+((y[i]-y[0])**2))),2))
@@ -183,6 +164,8 @@ def polygon_analysis(file_name,
         return side_len,m,x,y
 
 
+
+
     def allow(sides=sides,width=width,height=height):
         side,_,x,y =  sides_length_and_slope(sides)
         
@@ -198,6 +181,8 @@ def polygon_analysis(file_name,
         if(flag==1):
             
             return (np.reshape(sides,(len(sides),2)))
+
+
 
 
     def angle(sides,m):
@@ -220,6 +205,8 @@ def polygon_analysis(file_name,
 ##        print(angles)        
         return angles
      
+
+
     def Fiveto15shape(sides):
         
         for i in range(11):
@@ -228,14 +215,15 @@ def polygon_analysis(file_name,
                 side,m,_,_= sides_length_and_slope(sides)
                 angles =angle(sides,m)
                 if (error_detection(angles)<limit):
-                    if (error_detection(side)<limit): 
-                        print (f'Regular {shapes[i]}')
-                        write_angle_slope_and_sides(sides,side,angles,m)
-                        write_name(f'Regular {shapes[i]}')
-                        save_to_csv(sides,side,angles,name=f"Regular {shapes[i]}", m=m)
-
-                        
+                    
+                    
+                    print (f'Regular {shapes[i]}')
+                    write_angle_slope_and_sides(sides,side,angles,m)
+                    write_name(f'Regular {shapes[i]}')
+                    save_to_csv(sides,side,angles,name=f"Regular {shapes[i]}", m=m)
+                
                 else:
+                        
                     print (f'{shapes[i]}')
                     write_angle_slope_and_sides(sides,side,angles,m)
                     write_name(f'{shapes[i]}')
@@ -243,7 +231,6 @@ def polygon_analysis(file_name,
                     
                     
                         
-                    
 
     def show_and_save_fig_data(sides,counter3):
         
@@ -251,6 +238,8 @@ def polygon_analysis(file_name,
             counter2=0
             plt.scatter(np.reshape(sides,(len(sides),2))[i][counter2],np.reshape(sides,(len(sides),2))[i][counter2+1],marker= markers[counter3], c=colors[counter3])
             
+
+
     def write_angle_slope_and_sides(sides,side,angles,m,show_angles=show_angles,show_sides=show_sides):
         middle_point_X=[]
         middle_point_Y=[]
@@ -279,27 +268,27 @@ def polygon_analysis(file_name,
                 c=0
                 cv2.putText(img1, f"{(m[j])}", (middle_point_X[j], int(middle_point_Y[j]+(max(height,width)*0.05))), font, font_size, ((0,255,0))) #blue green red
         
+
+
     def save_to_csv(sides,side,angles,name,m):
         slope.append(m)
         distance.append(side)
-
+        Name.append(name[:])
+        
         if save_data_to_csv=='yes':
             x= 'csv_data_'+file_name[:(len(file_name)-4)]+'.csv'
             
             save_csv=os.path.join(path_save,f'csv_data_{name_file}.csv')
             with open(save_csv, mode='w') as data_file:
                 data_writer = csv.writer(data_file, delimiter=';')
-
-                
-    ##            fieldnames = ['SIDE', 'ANGLES', 'NAME', 'SLOPE']
-    ##            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
                 fieldname=[['x_coordinate','y_coordinate','distance_in_pixels', 'angles', 'name', 'slope']]
-
                 data_writer.writerows(fieldname)
                 for i in range(len(side)):
                     c=0
                     data_writer.writerow([sides[i][c],sides[i][c+1],side[i], angles[i], name, m[i]])
             
+
+
     def write_name(name):
         if(show_name=='yes'):
             cv2.putText(img1, name, (int(max(height,width)*0.20), int(max(height,width)*0.80)), font_of_name, font_size_name, ((255,0,0))) #blue green red
@@ -423,30 +412,23 @@ def polygon_analysis(file_name,
         im= Image.open(save_analysis)
         im.show()
     
-    return len(sides),sides,distance,slope,angles,     
+    return len(sides),sides,distance,slope,angles,Name[0]    
 
 
+def help():
+    print("""#https://pypi.org/project/py2pyAnalysis/
+#https://github.com/Pushkar-Singh-14/Polygon-Analysis
+#http://py2py.com/polygon-analysis-overview-and-explanation/
 
-    
+Number_of_sides,Coordinates,Distance_in_pixels,Slopes,Angles,Names= py.polygon_analysis ( file_name,
+                     show_and_save_contour='yes',
+                     show_and_save_analysis='yes',
+                     show_sides='yes',
+                     show_angles='yes',
+                     show_slope='yes',
+                     show_name='yes',
+                     save_data_to_csv='yes',
+                     font=cv2.FONT_HERSHEY_PLAIN
+                     ) """)
 
-##Number_of_sides,Coordinates,Distance_in_pixels,Slopes,Angles= polygon_analysis(file_name,
-##                                                                              show_and_save_contour='yes',
-##                                                                             show_and_save_analysis='yes',
-##                                                                             show_sides='yes',
-##                                                                             show_angles='yes',
-##                                                                             show_slope='yes',
-##                                                                             show_name='yes',
-##                                                                             save_data_to_csv='yes',
-##                                                                             font=cv2.FONT_HERSHEY_PLAIN)
-##print(Number_of_sides)
-##print(Coordinates)
-##print(Distance_in_pixels)
-##print(Slopes)
-##print(Angles)
-
-
-
-
-
-
-
+  
