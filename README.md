@@ -6,15 +6,6 @@ Our aim is to build a module which is enough to analyze a polygon and return som
 
 ----------
 
-Installation
--------------
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install **py2pyAnalysis**.
-
-```bash
-pip install py2pyAnalysis
-```
-----------
 
 Documents
 -------------
@@ -47,7 +38,7 @@ Everything that saves during the program related to this file will save in this 
 
 > - **Show_slope :** This will show the Slope on the image, changing it to NO will result to not showing Slope on the image.
 
-> - **font :** you can change the Font if you want, Here is the list of some fonts.
+> - **font :** you can change the Font if you want, Here is the list of some fonts
 ```python
     cv2.FONT_HERSHEY_SIMPLEX
     cv2.FONT_HERSHEY_PLAIN,
@@ -88,7 +79,7 @@ and it will bring you the code below
 ```python
 #https://pypi.org/project/py2pyAnalysis/
 #https://github.com/Pushkar-Singh-14/Polygon-Analysis
-#http://py2py.com/polygon-analysis-overview-and-explaination/
+#http://py2py.com/polygon-analysis-overview-and-explanation/
 
 Number_of_sides,Coordinates,Distance_in_pixels,Slopes,Angles,Names= py.polygon_analysis ( file_name,
                      show_and_save_contour='yes',
