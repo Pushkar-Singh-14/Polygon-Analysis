@@ -9,7 +9,7 @@ Our aim is to build a module which is enough to analyze a polygon and return som
 Installation
 -------------
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install **py2pyAnalysis**.
 
 ```bash
 pip install py2pyAnalysis
